@@ -24,7 +24,19 @@ static int readInt(const string& prompt) {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
-
+static double readDouble(const string& prompt) {
+    double value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            return value;
+        }
+        cout << "Invalid. Please enter a valid decimal number.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
 static string readLine(const string& prompt) {
     string line;
     cout << prompt;
@@ -85,7 +97,9 @@ int main() {
                 case 1: {
                     string id = readLine("ID: ");
                     int m = readInt("Material (0:Wood, 1:Metal, 2:Aluminum): ");
-                    double w = 10, h = 10, d = 10; // Đơn giản hóa nhập liệu
+                    double w = readDouble("Width: ");
+                    double h = readDouble("Height: ");
+                    double d = readDouble("Depth: "); 
                     string c = readLine("Color: ");
                     shared_ptr<FurnitureBase> f;
                     if (m == 0) f = make_shared<WoodFurniture>(id, w, h, d, c);
