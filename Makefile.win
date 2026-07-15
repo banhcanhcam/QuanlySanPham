@@ -1,0 +1,43 @@
+# Project: Project1
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = C:/Users/ADMIN/Downloads/OrderManager.o C:/Users/ADMIN/Downloads/FurnitureManage.o C:/Users/ADMIN/Downloads/Order.o C:/Users/ADMIN/Downloads/FurnitureBase.o C:/Users/ADMIN/Downloads/main.o C:/Users/ADMIN/Downloads/SearchDisplay.o
+LINKOBJ  = C:/Users/ADMIN/Downloads/OrderManager.o C:/Users/ADMIN/Downloads/FurnitureManage.o C:/Users/ADMIN/Downloads/Order.o C:/Users/ADMIN/Downloads/FurnitureBase.o C:/Users/ADMIN/Downloads/main.o C:/Users/ADMIN/Downloads/SearchDisplay.o
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -fopenmp
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = Project1.exe
+CXXFLAGS = $(CXXINCS) -fopenmp
+CFLAGS   = $(INCS) -fopenmp
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\DevCpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+C:/Users/ADMIN/Downloads/OrderManager.o: C:/Users/ADMIN/Downloads/OrderManager.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/OrderManager.cpp -o C:/Users/ADMIN/Downloads/OrderManager.o $(CXXFLAGS)
+
+C:/Users/ADMIN/Downloads/FurnitureManage.o: C:/Users/ADMIN/Downloads/FurnitureManage.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/FurnitureManage.cpp -o C:/Users/ADMIN/Downloads/FurnitureManage.o $(CXXFLAGS)
+
+C:/Users/ADMIN/Downloads/Order.o: C:/Users/ADMIN/Downloads/Order.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/Order.cpp -o C:/Users/ADMIN/Downloads/Order.o $(CXXFLAGS)
+
+C:/Users/ADMIN/Downloads/FurnitureBase.o: C:/Users/ADMIN/Downloads/FurnitureBase.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/FurnitureBase.cpp -o C:/Users/ADMIN/Downloads/FurnitureBase.o $(CXXFLAGS)
+
+C:/Users/ADMIN/Downloads/main.o: C:/Users/ADMIN/Downloads/main.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/main.cpp -o C:/Users/ADMIN/Downloads/main.o $(CXXFLAGS)
+
+C:/Users/ADMIN/Downloads/SearchDisplay.o: C:/Users/ADMIN/Downloads/SearchDisplay.cpp
+	$(CPP) -c C:/Users/ADMIN/Downloads/SearchDisplay.cpp -o C:/Users/ADMIN/Downloads/SearchDisplay.o $(CXXFLAGS)
