@@ -4,7 +4,7 @@
 // Khởi tạo AccountManager (Có thể tạo sẵn 1 tài khoản admin gốc để hệ thống không bị khóa)
 AccountManager::AccountManager() {
     // Tài khoản mặc định ban đầu
-    accounts["admin"] = {"admin", "123456", UserRole::ADMIN};
+    accounts["admin"] = {"admin", "1", UserRole::ADMIN};
 }
 
 // Chức năng Đăng ký
