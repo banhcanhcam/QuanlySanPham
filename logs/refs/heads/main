@@ -1,2 +1,8 @@
 0000000000000000000000000000000000000000 7defc128db4b89aaf0dfdfa8c7903461863bc313 Hung <firegodphonix039@gmail.com> 1784122821 +0700	commit (initial): add project
 7defc128db4b89aaf0dfdfa8c7903461863bc313 d50f7764343abe01db2d95cd10db37bad8698a98 Hung <firegodphonix039@gmail.com> 1784128537 +0700	commit: fixlan1
+d50f7764343abe01db2d95cd10db37bad8698a98 aff6c8bf3bbaa6b87e62870125b41132766af252 Hung <firegodphonix039@gmail.com> 1784196143 +0700	commit: clean
+aff6c8bf3bbaa6b87e62870125b41132766af252 9012c4f4a346507f96b739cf1ce3dd4eb590a456 Hung <firegodphonix039@gmail.com> 1784196404 +0700	commit: update Product
+9012c4f4a346507f96b739cf1ce3dd4eb590a456 928e47926ffdc17f61a5f508f80ce679d752fda3 Hung <firegodphonix039@gmail.com> 1784196513 +0700	commit: save local changes
+928e47926ffdc17f61a5f508f80ce679d752fda3 3df07d598b03f680de04fbfe53f671ab881cb98b Hung <firegodphonix039@gmail.com> 1784196544 +0700	pull origin main --rebase (finish): refs/heads/main onto c32543ce31fa033966a40ca0b49905d4f37b55fb
+3df07d598b03f680de04fbfe53f671ab881cb98b 7b17c1e6e9c93b6c5cfc871679bddab629ed3830 Hung <firegodphonix039@gmail.com> 1784196888 +0700	commit: delete trash file
+7b17c1e6e9c93b6c5cfc871679bddab629ed3830 4d5282cc2f6f0e4e5cca491a2ec164865ed7c2c4 Hung <firegodphonix039@gmail.com> 1784197235 +0700	commit: third times clear
