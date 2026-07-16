@@ -7,41 +7,96 @@
 #include "DerivedFurniture.h"
 #include "FurnitureManager.h"
 #include "OrderManager.h"
+#include "Product.h"
+#include <cctype>
 
 using namespace std;
 
 // --- CÁC HÀM HỖ TRỢ NHẬP LIỆU ---
+static int readNumber(const string& prompt) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            
+            // KIỂM TRA: Nếu là số âm hoặc bằng 0 thì bắt nhập lại
+            if (value < 0) {
+                cout << "Error: Value must be greater than 0. Please try again.\n";
+                continue;
+			}
+			return value;
+		}
+	}
+}
 static int readInt(const string& prompt) {
     int value;
     while (true) {
         cout << prompt;
         if (cin >> value) {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            
+            // KIỂM TRA: Nếu là số âm hoặc bằng 0 thì bắt nhập lại
+            if (value < 0) {
+                cout << "Error: Value must be greater than 0. Please try again.\n";
+                continue;
+			}
+            else if (value > 2){ 
+                cout << "Error: Value must be smaller than 3. Please try again.\n";
+                continue; 
+			}
+            }
             return value;
         }
-        cout << "invalid please put an interger number.\n";
+        cout << "Invalid! Please enter a valid integer number.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-}
+
 static double readDouble(const string& prompt) {
     double value;
     while (true) {
         cout << prompt;
         if (cin >> value) {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            
+            // KIỂM TRA: Chặn kích thước âm hoặc bằng 0
+            if (value <= 0) {
+                cout << "Error: Dimension must be greater than 0. Please try again.\n";
+                continue; 
+            }
             return value;
         }
-        cout << "Invalid. Please enter a valid decimal number.\n";
+        cout << "Invalid! Please enter a valid decimal number.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
-static string readLine(const string& prompt) {
+
+static string readLineAlpha(const string& prompt) {
     string line;
-    cout << prompt;
-    getline(cin, line);
-    return line;
+    while (true) {
+        cout << prompt;
+        getline(cin, line);
+        
+        bool allLetters = true;
+        // Kiểm tra từng ký tự trong chuỗi người dùng nhập
+        for (char c : line) {
+            // !isalpha(c) nghĩa là "không phải chữ"
+            // !isspace(c) nghĩa là "không phải khoảng trắng"
+            // Nếu không phải chữ và không phải khoảng trắng -> Báo lỗi
+            if (!isalpha(c) && !isspace(c)) { 
+                allLetters = false;
+                break;
+            }
+        }
+        
+        // Nếu tất cả đều là chữ và chuỗi không bị rỗng thì trả về
+        if (allLetters && !line.empty()) {
+            return line;
+        }
+        cout << "Invalid input, please enter letters only (no numbers).\n";
+    }
 }
 
 // --- MENU CŨ CỦA BẠN (Đã tích hợp) ---
@@ -87,6 +142,7 @@ int main() {
     }
 
     // --- SAU KHI ĐĂNG NHẬP ---
+    
     if (loggedInUser->role == UserRole::ADMIN) {
         while (true) {
             showAdminMenu();
@@ -96,27 +152,31 @@ int main() {
             switch (choice) {
                 case 1: {
                     string id = readLine("ID: ");
+                    string name = readValidName("Enter Product Name: ");
                     int m = readInt("Material (0:Wood, 1:Metal, 2:Aluminum): ");
-                    double w = readDouble("Width: ");
-                    double h = readDouble("Height: ");
-                    double d = readDouble("Depth: "); 
-                    string c = readLine("Color: ");
+                    double w = readDouble("Width(cm): ");
+                    double h = readDouble("Height(cm): ");
+                    double d = readDouble("Depth(cm): "); 
+                    string c = readLineAlpha("Color: ");
+                    double price = readDouble("Price($): ");
+                    int quantity = readNumber ("Quantity: ");
                     shared_ptr<FurnitureBase> f;
                     if (m == 0) f = make_shared<WoodFurniture>(id, w, h, d, c);
                     else f = make_shared<MetalFurniture>(id, w, h, d, c);
                     fManager.addFurniture(f);
+                    cout << "\n>>> Success: Added new furniture item (Name: " << name << ", "<< "ID: "<<  id <<") successfully! <<<\n";
                     break;
                 }
                 case 2: {
-                    auto f = fManager.searchById(readLine("ID: "));
+                    auto f = fManager.searchById(readLineAlpha("ID: "));
                     if (f) cout << "Found item.\n";
                     break;
                 }
                 case 3: fManager.displayAll(); break;
                 // Gọi với 7 tham số: OID, FID, Carpenter, Date, Days, fManager, username
                 case 4: 
-                    oManager.createOrder(readLine("OID: "), readLine("FID: "), 
-                                         readLine("Carpenter: "), readLine("Date: "), 
+                    oManager.createOrder(readLineAlpha("OID: "), readLineAlpha("FID: "), 
+                                         readLineAlpha("Carpenter: "), readLineAlpha("Date: "), 
                                          readInt("Days: "), fManager, loggedInUser->username);
                     break;
                 case 5: oManager.trackByStatus(OrderStatus::PENDING); break;
@@ -132,8 +192,8 @@ int main() {
                     cout << "Tính năng thống kê đang được phát triển...\n";
                     break;
                 }
-                case 8: fManager.deleteProduct(readLine("Delete FID: ")); break;
-                case 9: oManager.deleteOrder(readLine("Delete OID: ")); break;
+                case 8: fManager.deleteProduct(readLineAlpha("Delete FID: ")); break;
+                case 9: oManager.deleteOrder(readLineAlpha("Delete OID: ")); break;
                 default: cout << "Invalid!\n";
             }
         }
