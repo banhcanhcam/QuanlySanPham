@@ -164,7 +164,7 @@ int main() {
                     if (m == 0) f = make_shared<WoodFurniture>(id, w, h, d, c);
                     else f = make_shared<MetalFurniture>(id, w, h, d, c);
                     fManager.addFurniture(f);
-                    cout << "\n>>> Success: Added new furniture item (Name " << name << "ID: "<<  id <<") successfully! <<<\n";
+                    cout << "\n>>> Success: Added new furniture item (Name: " << name << ", "<< "ID: "<<  id <<") successfully! <<<\n";
                     break;
                 }
                 case 2: {
